@@ -1,0 +1,286 @@
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""/>
+<script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	crossorigin=""></script>
+
+<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+<link rel="stylesheet" type="text/css" href="css/L.Control.Locate.css"  />
+<link rel="stylesheet" type="text/css" href="css/L.Control.Locate.mapbox.css"  />
+<script src="js/L.Control.Locate.min.js"></script> 
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+<link rel="stylesheet" href="css/Leaflet.BigImage.min.css" />
+<script src="js/Leaflet.BigImage.min.js"></script>
+
+<script src="js/leaflet.browser.print.js"></script>
+
+<script src="map_style.js"></script> 
+
+<style>
+
+  #mapid { height: 100%;
+           
+           width: 100%}
+
+  #panel {
+      width: 300px;
+      height: 100%;
+      background-color: lightgrey;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  }
+  .container{
+      height: 100%;
+      width: 100%;
+      display: flex;
+  }
+  .legend
+  {
+      background-color: lightgrey;
+  }
+  
+  .circle
+  {
+
+      height: 10px;
+      width: 10px;
+      display: inline-block;
+      
+  }
+
+  .searchBar{
+      display: flex;
+      flex-direction: row;
+  }
+  #goBtn
+  {
+      width: 80px;
+      height: 30px;
+      font-size: 18px;
+      margin: 10px
+		  
+  }
+  #title
+  {
+      font-size: 35px;
+      text-align: center;
+  }
+  #subtitle
+  {
+      font-size: 25px;
+      text-align: center;
+  }
+
+  #guide {
+      top: 10px;
+      position: relative;
+  }
+  
+  #legend
+  {
+      top: 50px;
+      position: relative;
+  }
+
+  #footer
+  {
+      position: absolute;
+      bottom: 0;
+  }
+
+  .normal_text{
+      color: black
+  }
+
+  .normal_text em {
+      color: purple;
+  }
+
+  .leaflet-control-browser-print {display: none;}
+  .leaflet-control-geocoder
+  {
+      width: 220px;
+      font-size: 12px;
+      margin: 5px;
+  }
+  .leaflet-bar
+  {
+      box-shadow: none;
+  }
+  
+</style>
+
+<div class="container">
+  <div id="panel"></div>
+  <div id="mapid"></div>
+</div>
+
+
+<script>
+
+  var panel = d3.select("#panel").style('display', 'flex').style('flex-direction', 'column').style('justify-content', 'space-between')
+
+  var header = panel.append('div').style('display', 'flex').style('flex-direction', 'column')
+  var footer = panel.append('div').style('display', 'flex').style('flex-direction', 'column')
+
+  header.append("div")
+    .text("Unity 2020")
+    .style("font-size", "30px")
+    .style("text-align", 'center')
+
+  header.append("div")
+    .text("Outreach Areas")
+    .style("font-size", "20px")
+    .style("text-align", 'center')
+
+  header.append('button')
+    .style('margin-top', '20px')
+    .text("Print / Save Map")
+    .style('content-align', 'center')
+    .style('margin-left', '10px')
+    .style('margin-right', '10px')
+    .style('margin-top', '30px')
+    .on('click', function()
+	{
+	    var modeToUse = L.control.browserPrint.mode.auto();
+	    map.printControl.print(modeToUse);
+	})
+
+  header.append('div')
+    .style('margin-top', '20px')
+    .text("Welcome volunteers! Use this map to find areas near you that may have the highest possibility of supporting the Unity2020 message.")
+
+
+  var legend_data = [[{name: "Likely", color: ""}, {name: null, color: "purple"}],
+		     [{name: "Possible", color: ""}, {name: null, color: "orange"}],
+		     [{name: "Not Likely", color: ""}, {name: null, color: "green"}],
+		    ]
+  header.append('table')
+    .style('margin-top', '20px')
+    .append('tbody')
+    .selectAll('tr').data(legend_data).enter().append('tr')
+    .selectAll('td').data(function(d) {return d})
+    .enter().append('td')
+    .style('width', '100px')
+    .style('opacity', function(d)
+	   {
+	       if (d.name) {return 1}
+	       else return 0.5
+})
+    .text(function(d){return d.name})
+    .style('background-color', function(d){return d.color})
+
+  header.append('div')
+    .attr('id', 'custom-map-controls')
+
+  
+  footer.append('div')
+    .text("Data Sources:")
+    .style('margin-top', '100px')
+    .style('margin-bottom', '10px')
+  
+footer.append('a')
+    .html("Voter Data")
+    .attr("href", "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ")
+  
+  // Initialize Map
+  // Start view over Washington State, zoomed out
+  var map = L.map('mapid').setView([48, -122], 8)
+  //map.locate({setView: true})
+
+  var geocoder = L.Control.geocoder({
+      //defaultMarkGeocode: false,
+      collapsed: false,
+      placeholder: "Search..."
+      
+  })
+      .on('markgeocode', function(e) {
+	  var bbox = e.geocode.bbox;
+	  var poly = L.polygon([
+	      bbox.getSouthEast(),
+	      bbox.getNorthEast(),
+	      bbox.getNorthWest(),
+	      bbox.getSouthWest()
+	  ])
+	  map.fitBounds(poly.getBounds());
+      })
+      .addTo(map);
+
+  // Print map
+  L.control.browserPrint({manualMode: true}).addTo(map)
+
+  // Move leaflet 'control' off the map
+  var newParent = document.getElementById('custom-map-controls');
+  var oldParent = document.getElementsByClassName("leaflet-top leaflet-right")
+
+  while (oldParent[0].childNodes.length > 0) {
+      newParent.appendChild(oldParent[0].childNodes[0]);
+  }
+  
+  // Add basemap. This can be replaced with an open-source base not from mapbox
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: 'pk.eyJ1IjoibHVvYm9nYW84ODEiLCJhIjoiY2s0M2NyM2VkMDZrbzNkbG5tcHc5ZHFjMSJ9.j6tCOtKPrrX0ok4BYESeRg'
+  }).addTo(map);
+  
+  
+  // URL of the AWS server with Tileserver running
+  //var url = "https://ec2-3-15-153-26.us-east-2.compute.amazonaws.com:8080/data/precincts_2016_tiles_2/{z}/{x}/{y}.pbf"
+
+var url = "https://maps443.tcpdump.rocks/data/nonvoters_2008_tiles/{z}/{x}/{y}.pbf"
+
+  // Add our map
+  var unity_map = L.vectorGrid.protobuf(url, {
+      
+      maxZoom: 20,
+      vectorTileLayerStyles: {
+	  interactive: true,
+	  buildings_merge_2008_bins: properties => {
+	      return getColorFromProperty(properties)
+	  }
+      },
+      // MUST include attribution - where we got this data
+      attribution: ' 2016 Precinct-Level Election Results - Harvard Datasource: Voting and Election Science Team, University of Florida and Witchita State University',
+      
+  }).on("click", function(d){console.log("clicked!")})
+
+  // Not working, but should be easy to pop up info about each precinct when user clicks on it
+  unity_map.on('click', function(e)
+	       {
+		   console.log(e)
+		   console.log("testing")
+	       })
+
+  // Add our layer to the map
+  unity_map.addTo(map)
+
+
+  function onEachFeature(feature, layer) {
+      layer.on({
+          mouseover: highlightFeature,
+          mouseout: resetHighlight,
+          click: clickFeature
+      });
+  }
+  
+  function clickFeature(d)
+  {
+      console.log(d)
+  }
+
+  </script>
+
