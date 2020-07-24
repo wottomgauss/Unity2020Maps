@@ -34,7 +34,7 @@ function build_desktop_panel()
     // Legend
     header.append('a')
 	.style('margin-top', '20px')
-	.html("<b>Step 2:</b> Look for Purple areas - these are the areas that our team thinks is most likely to be open to our message. Yellow regions are less likely to be interested. Green regions are unlikely, and the dark grey regions are very unlikely.")
+	.html("<b>Step 2:</b> Look for PURPLE areas - these are the areas that our team thinks is most likely to be open to our message. YELLOW regions are less likely to be interested. GREEN regions are unlikely, and GREY regions are very unlikely.")
 
     var legend_data = [[{name: "Likely", color: ""}, {name: null, color: "purple"}],
 		       [{name: "Possible", color: ""}, {name: null, color: "orange"}],
