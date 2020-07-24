@@ -134,6 +134,7 @@
   if (isMobile)
   {
       d3.select("#panel").remove()
+      L.Map.invalidateSize()
   }
   else
   {
@@ -222,8 +223,13 @@
 
   // Add our layer to the map
   base_layer.addTo(map)
-  unity_map.addTo(map)
+  // unity_map.addTo(map)
   base_labels.addTo(map)
+
+  if (isMobile)
+  {
+      map.locate({setView: true, maxZoom: 10});  
+  }
   
 
 
