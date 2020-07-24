@@ -15,28 +15,32 @@ function build_desktop_panel()
 	.style("font-size", "20px")
 	.style("text-align", 'center')
 
-    header.append('button')
-	.style('margin-top', '20px')
-	.text("Print / Save Map")
-	.style('content-align', 'center')
-	.style('margin-left', '10px')
-	.style('margin-right', '10px')
-	.style('margin-top', '30px')
-	.on('click', function()
-	    {
-		var modeToUse = L.control.browserPrint.mode.auto();
-		map.printControl.print(modeToUse);
-	    })
 
+    // Header
+    header.append('a')
+	.style('margin-top', '20px')
+	.html("Welcome volunteers! Use this map to find areas near you that may have the highest possibility of supporting the Unity2020 message.")
+
+    header.append('a')
+	.style('margin-top', '20px')
+	.html("<b>Step 1:</b> Zoom to your location or search for your city here:")
+
+    // Geocoder
     header.append('div')
-	.style('margin-top', '20px')
-	.text("Welcome volunteers! Use this map to find areas near you that may have the highest possibility of supporting the Unity2020 message.")
+	.attr('id', 'custom-map-controls')
 
+
+
+    // Legend
+    header.append('a')
+	.style('margin-top', '20px')
+	.html("<b>Step 2:</b> Look for Purple areas - these are the areas that our team thinks is most likely to be open to our message. Yellow regions are less likely to be interested. Green regions are unlikely, and the dark grey regions are very unlikely.")
 
     var legend_data = [[{name: "Likely", color: ""}, {name: null, color: "purple"}],
 		       [{name: "Possible", color: ""}, {name: null, color: "orange"}],
 		       [{name: "Not Likely", color: ""}, {name: null, color: "green"}],
 		      ]
+
     header.append('table')
 	.style('margin-top', '20px')
 	.append('tbody')
@@ -52,9 +56,26 @@ function build_desktop_panel()
 	.text(function(d){return d.name})
 	.style('background-color', function(d){return d.color})
 
-    header.append('div')
-	.attr('id', 'custom-map-controls')
 
+    // Save
+    header.append('a')
+	.style('margin-top', '20px')
+	.html("<b>Step 3:</b> Print your map here, or save an image to embed wheverever you want:")
+
+    header.append('button')
+	.style('margin-top', '20px')
+	.text("Print / Save Map")
+	.style('content-align', 'center')
+	.style('margin-left', '10px')
+	.style('margin-right', '10px')
+	.style('margin-top', '30px')
+	.on('click', function()
+	    {
+		var modeToUse = L.control.browserPrint.mode.auto();
+		map.printControl.print(modeToUse);
+	    })
+
+    // Footer
     
     footer.append('div')
 	.text("Data Sources:")
@@ -62,7 +83,7 @@ function build_desktop_panel()
 	.style('margin-bottom', '10px')
     
     footer.append('a')
-	.html("Voter Data")
+	.html("Harvard Dataverse")
 	.attr("href", "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ")
 
     footer.append('a')

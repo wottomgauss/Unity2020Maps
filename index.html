@@ -117,11 +117,11 @@
 </style>
 
 <div id="container">
-<div id="mapcontainer">
-  <div id="panel"></div>
-  <div id="mapid"></div>
-</div>
-<div id="footer"></div>
+  <div id="mapcontainer">
+    <div id="panel"></div>
+    <div id="mapid"></div>
+  </div>
+  <div id="footer"></div>
 </div>
 
 
@@ -146,7 +146,7 @@
   
   // Initialize Map
   // Start view over Washington State, zoomed out
-  var map = L.map('mapid').setView([48, -122], 8)
+  var map = L.map('mapid').setView([37, -95], 5)
   //map.locate({setView: true})
 
   var geocoder = L.Control.geocoder({
@@ -199,14 +199,14 @@
   })
   
   // URL of the AWS server with Tileserver running
-  var url = "https://maps443.tcpdump.rocks/data/nonvoters_2008_tiles/{z}/{x}/{y}.pbf"
+  var url = "https://maps443.tcpdump.rocks/data/precentile_precincts/{z}/{x}/{y}.pbf"
 
   // Add our map
   var unity_map = L.vectorGrid.protobuf(url, {
       maxZoom: 20,
       vectorTileLayerStyles: {
 	  interactive: true,
-	  buildings_merge_2008_bins: properties => {
+	  percentile_precincts_1: properties => {
 	      return getColorFromProperty(properties)
 	  }
       },
@@ -217,8 +217,8 @@
   
   // Add our layer to the map
   base_layer.addTo(map)
-  // unity_map.addTo(map)
-  //base_labels.addTo(map)
+  unity_map.addTo(map)
+  base_labels.addTo(map)
 
   if (isMobile)
   {
