@@ -40,11 +40,19 @@
       flex-direction: column;
       justify-content: space-between;
   }
-  .container{
+  #container{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+  }
+
+  #mapcontainer{
       height: 100%;
       width: 100%;
       display: flex;
   }
+
   .legend
   {
       background-color: lightgrey;
@@ -93,19 +101,6 @@
       position: relative;
   }
 
-  #footer
-  {
-      position: absolute;
-      bottom: 0;
-  }
-
-  .normal_text{
-      color: black
-  }
-
-  .normal_text em {
-      color: purple;
-  }
 
   .leaflet-control-browser-print {display: none;}
   .leaflet-control-geocoder
@@ -121,13 +116,21 @@
   
 </style>
 
-<div class="container">
+<div id="container">
+<div id="mapcontainer">
   <div id="panel"></div>
   <div id="mapid"></div>
+</div>
+<div id="footer"></div>
 </div>
 
 
 <script>
+
+
+  d3.select('#footer').append('a')
+    .html("Map tiles by <a href='http://stamen.com'>Stamen Design</a>, under <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a>. Data by <a href='http://openstreetmap.org'>OpenStreetMap</a>, under <a href='http://www.openstreetmap.org/copyright'>ODbL</a>.")
+
 
   var isMobile = (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
 
@@ -175,10 +178,10 @@
       newParent.appendChild(oldParent[0].childNodes[0]);
   }
 
-  
+
 
   // Add basemap. This can be replaced with an open-source base not from mapbox
-  var base_layer = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.png', {
+  var base_layer = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}.png', {
       attribution: 'Stamen Maps (maps.stamen.com)',
       maxZoom: 18,
       id: 'lines',
@@ -196,8 +199,6 @@
   })
   
   // URL of the AWS server with Tileserver running
-  //var url = "https://ec2-3-15-153-26.us-east-2.compute.amazonaws.com:8080/data/precincts_2016_tiles_2/{z}/{x}/{y}.pbf"
-
   var url = "https://maps443.tcpdump.rocks/data/nonvoters_2008_tiles/{z}/{x}/{y}.pbf"
 
   // Add our map
@@ -212,19 +213,12 @@
       // MUST include attribution - where we got this data
       attribution: ' 2016 Precinct-Level Election Results - Harvard Datasource: Voting and Election Science Team, University of Florida and Witchita State University',
       
-  }).on("click", function(d){console.log("clicked!")})
-
-  // Not working, but should be easy to pop up info about each precinct when user clicks on it
-  unity_map.on('click', function(e)
-	       {
-		   console.log(e)
-		   console.log("testing")
-	       })
-
+  })
+  
   // Add our layer to the map
   base_layer.addTo(map)
   // unity_map.addTo(map)
-  base_labels.addTo(map)
+  //base_labels.addTo(map)
 
   if (isMobile)
   {
