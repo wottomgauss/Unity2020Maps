@@ -6,7 +6,7 @@
       var metric = properties.nonvotes
       
       var style = {fillColor: "green",
-		   fillOpacity: 0.4,
+		   fillOpacity: 0.6,
 		   fill: true,
 		   color: "transparent"} 
       if (metric < 30)
