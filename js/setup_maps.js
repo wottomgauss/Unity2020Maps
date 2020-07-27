@@ -3,6 +3,13 @@
 // Full description of the technology stack explained here:
 //https://medium.com/@kennethchambers/using-tippecanoe-tileserver-gl-and-leaflet-to-serve-scale-independent-and-really-cool-looking-751368d821c7
 
+// Initialize Map
+var map = L.map('mapid').setView([37, -95], 5)
+
+
+// Automatically zoom to user's location - only works in HTTPS?
+//map.locate({setView: true})
+
 
 // Clever method to detect if the client is a mobile browser
 var isMobile = (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
@@ -10,7 +17,7 @@ var isMobile = (typeof window.orientation !== "undefined") || (navigator.userAge
 if (isMobile)
 {
     // Remove side panel if on Mobile
-    //d3.select("#panel").remove()
+    d3.select("#panel").remove()
     map.invalidateSize()
 
     // Problem: leaflet map is not rendering!
@@ -21,12 +28,6 @@ else
     build_desktop_panel()
 }
 
-
-// Initialize Map
-var map = L.map('mapid').setView([37, -95], 5)
-
-// Automatically zoom to user's location - only works in HTTPS?
-//map.locate({setView: true})
 
 var geocoder = L.Control.geocoder({
     collapsed: false,
