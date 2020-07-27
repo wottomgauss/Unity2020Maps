@@ -11,6 +11,7 @@ if (isMobile)
 {
     // Remove side panel if on Mobile
     d3.select("#panel").remove()
+    map.invalidateSize()
 
     // Problem: leaflet map is not rendering!
 }
@@ -24,8 +25,8 @@ else
 // Initialize Map
 var map = L.map('mapid').setView([37, -95], 5)
 
-// This code automatically zooms to user's location after asking for location access rights - but it doesn't work?
-//map.locate({setView: true})
+// Automatically zoom to user's location - only works in HTTPS?
+map.locate({setView: true})
 
 var geocoder = L.Control.geocoder({
     collapsed: false,
