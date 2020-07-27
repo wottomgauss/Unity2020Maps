@@ -58,7 +58,7 @@ while (oldParent[0].childNodes.length > 0) {
 
 // Add basemap from Stamen
 var base_layer = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}.png', {
-    attribution: 'Stamen Maps (maps.stamen.com)',
+    attribution: '',
     maxZoom: 18,
     id: 'lines',
     tileSize: 512,
@@ -66,7 +66,7 @@ var base_layer = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-hybrid
 })
 
 var base_background = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png', {
-    attribution: 'Stamen Maps (maps.stamen.com)',
+    attribution: '',
     maxZoom: 18,
     opacity: 0.5,
     id: 'lines',
@@ -77,7 +77,7 @@ var base_background = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-b
 
 // Add basemap labels so that they appear on top of all other layers
 var base_labels = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png', {
-    attribution: 'Stamen Maps (maps.stamen.com)',
+    attribution: "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, under <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a>. Data by <a href='http://openstreetmap.org'>OpenStreetMap</a>, under <a href='http://www.openstreetmap.org/copyright'>ODbL</a>.",
     maxZoom: 18,
     id: 'labels',
     tileSize: 512,
