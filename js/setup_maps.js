@@ -51,9 +51,9 @@ L.control.browserPrint({manualMode: true}).addTo(map)
 var newParent = document.getElementById('custom-map-controls');
 var oldParent = document.getElementsByClassName("leaflet-top leaflet-right")
 
-while (oldParent[0].childNodes.length > 0) {
-    newParent.appendChild(oldParent[0].childNodes[0]);
-}
+// while (oldParent[0].childNodes.length > 0) {
+//     newParent.appendChild(oldParent[0].childNodes[0]);
+// }
 
 
 
