@@ -64,6 +64,16 @@ var base_layer = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-hybrid
     zoomOffset: -1,
 })
 
+var base_background = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png', {
+    attribution: 'Stamen Maps (maps.stamen.com)',
+    maxZoom: 18,
+    opacity: 0.5,
+    id: 'lines',
+    tileSize: 512,
+    zoomOffset: -1,
+})
+
+
 // Add basemap labels so that they appear on top of all other layers
 var base_labels = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png', {
     attribution: 'Stamen Maps (maps.stamen.com)',
@@ -92,7 +102,8 @@ var unity_map = L.vectorGrid.protobuf(url, {
 
 // Add our layer to the map, in the right order for visibility
 base_layer.addTo(map)
-unity_map.addTo(map)
+base_background.addTo(map)
+//unity_map.addTo(map)
 base_labels.addTo(map)
 
 
