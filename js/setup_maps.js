@@ -1,6 +1,7 @@
 // This is the main Javascript file
 // Leaflet map is loaded with basemaps and our custom maps
 // Full description of the technology stack explained here:
+
 //https://medium.com/@kennethchambers/using-tippecanoe-tileserver-gl-and-leaflet-to-serve-scale-independent-and-really-cool-looking-751368d821c7
 
 // Initialize Map
@@ -10,22 +11,30 @@ var map = L.map('mapid').setView([37, -95], 5)
 // Automatically zoom to user's location - only works in HTTPS?
 //map.locate({setView: true})
 
-
 // Clever method to detect if the client is a mobile browser
 var isMobile = (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
 
 if (isMobile)
 {
     // Remove side panel if on Mobile
-    d3.select("#panel").remove()
+    d3.select("#left_panel").remove()
     map.invalidateSize()
+    map.setView([37, -95], 3)
+    build_mobile_panel()
 
-    // Problem: leaflet map is not rendering!
 }
 else
 {
     // Build the side panel
+
+    d3.select("#bottom_panel").remove()
     build_desktop_panel()
+
+    // d3.select("#left_panel").remove()
+    // map.invalidateSize()
+    // map.setView([37, -95], 3)
+    // build_mobile_panel()
+
 }
 
 
@@ -48,11 +57,13 @@ var geocoder = L.Control.geocoder({
 L.control.browserPrint({manualMode: true}).addTo(map)
 
 // Move leaflet 'control' off the map
-var newParent = document.getElementById('custom-map-controls');
-var oldParent = document.getElementsByClassName("leaflet-top leaflet-right")
-
+// var newParent = document.getElementById('custom-map-controls');
+// var oldParent = document.getElementsByClassName("leaflet-top leaflet-right")
 // while (oldParent[0].childNodes.length > 0) {
-//     newParent.appendChild(oldParent[0].childNodes[0]);
+//     if (newParent)
+//     {
+// 	//newParent.appendChild(oldParent[0].childNodes[0]);
+//     }
 // }
 
 
@@ -105,7 +116,7 @@ var unity_map = L.vectorGrid.protobuf(url, {
 // Add our layer to the map, in the right order for visibility
 base_layer.addTo(map)
 base_background.addTo(map)
-//unity_map.addTo(map)
+unity_map.addTo(map)
 base_labels.addTo(map)
 
 

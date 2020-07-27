@@ -1,6 +1,6 @@
 function build_desktop_panel()
 {
-    var panel = d3.select("#panel").style('display', 'flex').style('flex-direction', 'column')
+    var panel = d3.select("#left_panel").style('display', 'flex').style('flex-direction', 'column')
 	.style('justify-content', 'space-between')
 
     var header = panel.append('div').style('display', 'flex')
@@ -93,4 +93,10 @@ function build_desktop_panel()
 
     
 
+}
+
+
+build_mobile_panel()
+{
+    
 }
