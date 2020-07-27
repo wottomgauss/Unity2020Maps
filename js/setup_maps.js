@@ -10,7 +10,7 @@ var isMobile = (typeof window.orientation !== "undefined") || (navigator.userAge
 if (isMobile)
 {
     // Remove side panel if on Mobile
-    d3.select("#panel").remove()
+    //d3.select("#panel").remove()
     map.invalidateSize()
 
     // Problem: leaflet map is not rendering!
@@ -26,7 +26,7 @@ else
 var map = L.map('mapid').setView([37, -95], 5)
 
 // Automatically zoom to user's location - only works in HTTPS?
-map.locate({setView: true})
+//map.locate({setView: true})
 
 var geocoder = L.Control.geocoder({
     collapsed: false,

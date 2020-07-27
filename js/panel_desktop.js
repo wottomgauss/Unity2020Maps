@@ -1,9 +1,12 @@
 function build_desktop_panel()
 {
-    var panel = d3.select("#panel").style('display', 'flex').style('flex-direction', 'column').style('justify-content', 'space-between')
+    var panel = d3.select("#panel").style('display', 'flex').style('flex-direction', 'column')
+	.style('justify-content', 'space-between')
 
-    var header = panel.append('div').style('display', 'flex').style('flex-direction', 'column')
-    var footer = panel.append('div').style('display', 'flex').style('flex-direction', 'column').style('margin-bottom', "20px")
+    var header = panel.append('div').style('display', 'flex')
+	.style('flex-direction', 'column')
+    var footer = panel.append('div').style('display', 'flex').style('flex-direction', 'column')
+	//.style('margin-top', "20px")
 
     header.append("div")
 	.text("Unity 2020")
@@ -78,16 +81,15 @@ function build_desktop_panel()
     // Footer
     
     footer.append('div')
-	.text("Data Sources:")
-	.style('margin-top', '30px')
+    	.text("Data Sources:")
     
     footer.append('a')
-	.html("Harvard Dataverse")
-	.attr("href", "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ")
+    	.html("Harvard Dataverse")
+    	.attr("href", "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ")
 
     footer.append('a')
-	.html("")
-	.attr("href", "maps.stamen.com")
+    	.html("")
+    	.attr("href", "maps.stamen.com")
 
     
 
