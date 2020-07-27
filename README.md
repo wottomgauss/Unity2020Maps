@@ -9,7 +9,7 @@ All spatial data is from freely available sources. The most important source is 
 
 ## Technology Stack
 
-Large spatial datasets must be broken up into small "tiles" and hosted on a server that delivers each tile based on a client's latitude/longitude/zoom level. 
+Large spatial datasets must be broken up into small "tiles" and hosted on a server that delivers each tile based on a client's latitude/longitude/zoom level, which are then rendered using a browser map library. Our stack closely resembles this guide: [Using Tippecanoe, Tileserver GL , and Leaflet to serve scale-independent (and really cool looking) Raster (or vector) tiles at higher level zooms](https://medium.com/@kennethchambers/using-tippecanoe-tileserver-gl-and-leaflet-to-serve-scale-independent-and-really-cool-looking-751368d821c7)
 
 - Tippecanoe is used to convert these large geojson files into mbtile format. Zoom level can be specified so that high-resolution layers are only displayed at high zoom, and low resolution (and faster) tiles are visible at low zoom levels.
 
