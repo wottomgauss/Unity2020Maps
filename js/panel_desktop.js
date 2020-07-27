@@ -79,8 +79,7 @@ function build_desktop_panel()
     
     footer.append('div')
 	.text("Data Sources:")
-	.style('margin-top', '100px')
-	.style('margin-bottom', '10px')
+	.style('margin-top', '30px')
     
     footer.append('a')
 	.html("Harvard Dataverse")
