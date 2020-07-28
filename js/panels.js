@@ -98,8 +98,6 @@ function build_desktop_panel()
     	.html("")
     	.attr("href", "maps.stamen.com")
 
-    
-
 }
 
 
@@ -112,7 +110,6 @@ function build_mobile_panel()
 		      ]
 
     panel.append('table')
-	.style('margin-left', '10px')
 	.style('text-size', '8px')
 	.append('tbody')
 	.append('tr')
