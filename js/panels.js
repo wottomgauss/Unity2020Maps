@@ -39,11 +39,11 @@ function build_desktop_panel()
 	.style('margin-top', '20px')
 	.html("<b>Step 2:</b> Look for PURPLE areas - these are the areas that our team thinks is most likely to be open to our message. YELLOW regions are less likely to be interested. GREEN regions are unlikely, and GREY regions are very unlikely.")
 
-    var legend_data = [[{name: "★★★★★", color: ""}, {name: null, color: "purple"}],
-		       [{name: "★★★★", color: ""}, {name: null, color: "orange"}],
-		       [{name: "★★★", color: ""}, {name: null, color: "yellow"}],
-		       [{name: "★★", color: ""}, {name: null, color: "green"}],
-		       [{name: "★", color: ""}, {name: null, color: "black"}],
+    var legend_data = [[{name: "&bigstar; &bigstar; &bigstar; &bigstar; &bigstar;", color: ""}, {name: null, color: "purple"}],
+		       [{name: "&bigstar; &bigstar; &bigstar; &bigstar;", color: ""}, {name: null, color: "orange"}],
+		       [{name: "&bigstar; &bigstar; &bigstar;", color: ""}, {name: null, color: "yellow"}],
+		       [{name: "&bigstar; &bigstar;", color: ""}, {name: null, color: "green"}],
+		       [{name: "&bigstar;", color: ""}, {name: null, color: "black"}],
 		      ]
 
     header.append('table')
@@ -64,7 +64,7 @@ function build_desktop_panel()
 		   if (d.name) {return 1}
 		   else return 0.5
 	       })
-	.text(function(d){return d.name})
+	.html(function(d){return d.name})
 	.style('background-color', function(d){return d.color})
 
 
