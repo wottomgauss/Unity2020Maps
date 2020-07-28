@@ -22,6 +22,5 @@ Large spatial datasets must be broken up into small "tiles" and hosted on a serv
 
 ## Issues:
 
-- This map does not render properly on mobile. This is a problem because volunteers are most likely to use this map on their mobile device while exploring hotspot areas.
-
-- Currently this map is only hosted in Github pages. It needs a permanent home.
+- Colors are a work in progress. Trying to balance resolution and clarity.
+- Still need to buy a custom domain - open to suggestions
