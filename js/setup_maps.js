@@ -107,7 +107,7 @@ var unity_map_high = L.vectorGrid.protobuf(url_high, {
     maxZoom: 20,
     vectorTileLayerStyles: {
 	interactive: true,
-	percentile_precincts_1: properties => {
+	targets_high: properties => {
 	    return getColorFromProperty1(properties, "percentile")
 	}
     },
@@ -124,8 +124,8 @@ var unity_map_low = L.vectorGrid.protobuf(url_low, {
     maxZoom: 8,
     vectorTileLayerStyles: {
 	interactive: true,
-	counties_thirdparty_normal: properties => {
-	    return getColorFromProperty2(properties, "third_normal")
+	targets_low: properties => {
+	    return getColorFromProperty2(properties, "percentile")
 	}
     },
     // MUST include attribution - where we got this data

@@ -55,20 +55,20 @@ function getColorFromProperty2(properties, column)
       {
 	  style.fillColor = "black"
       }
-      else if (metric < 8)
+      else if (metric < 5)
       {
 	  style.fillColor = "green"
       }
-      else if (metric < 9)
+      else if (metric < 6)
       {
 	  style.fillColor = "yellow"
       }
 
-      else if (metric < 10)
+      else if (metric < 7)
       {
 	  style.fillColor = "orange"
       }
-      else if (metric == 10)
+      else if (metric < 11)
       {
 	  style.fillColor = "purple"
       }
