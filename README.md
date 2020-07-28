@@ -23,4 +23,4 @@ Large spatial datasets must be broken up into small "tiles" and hosted on a serv
 ## Issues:
 
 - Colors are a work in progress. Trying to balance resolution and clarity.
-- Still need to buy a custom domain - open to suggestions
+

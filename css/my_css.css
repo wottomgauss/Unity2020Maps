@@ -81,7 +81,7 @@
 .leaflet-control-browser-print {display: none;}
 .leaflet-control-geocoder
 {
-    width: 220px;
+    width: 300px;
     font-size: 12px;
     margin: 5px;
 }
