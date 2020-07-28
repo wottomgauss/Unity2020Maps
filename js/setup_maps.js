@@ -8,8 +8,6 @@
 var map = L.map('mapid').setView([37, -95], 5)
 
 
-// Automatically zoom to user's location - only works in HTTPS?
-//map.locate({setView: true})
 
 // Clever method to detect if the client is a mobile browser
 var isMobile = (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
@@ -19,8 +17,11 @@ if (isMobile)
     // Remove side panel if on Mobile
     d3.select("#left_panel").remove()
     map.invalidateSize()
-    map.setView([37, -95], 3)
+    map.setView([38, -122], 5)
     build_mobile_panel()
+
+    map.locate({setView: true})
+
 
 }
 else
@@ -97,15 +98,15 @@ var base_labels = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-label
 })
 
 // URL of the AWS server with Tileserver running
-var url = "https://maps443.tcpdump.rocks/data/precentile_precincts/{z}/{x}/{y}.pbf"
+var url_high = "https://maps443-1.tcpdump.rocks/data/targets_high/{z}/{x}/{y}.pbf"
 
-// Add our map
-var unity_map = L.vectorGrid.protobuf(url, {
+// Add our map - HIGH RES
+var unity_map_high = L.vectorGrid.protobuf(url_high, {
     maxZoom: 20,
     vectorTileLayerStyles: {
 	interactive: true,
 	percentile_precincts_1: properties => {
-	    return getColorFromProperty(properties)
+	    return getColorFromProperty1(properties, "percentile")
 	}
     },
     // MUST include attribution - where we got this data
@@ -113,10 +114,29 @@ var unity_map = L.vectorGrid.protobuf(url, {
     
 })
 
+var url_low = "https://maps443-2.tcpdump.rocks/data/targets_low/{z}/{x}/{y}.pbf"
+
+// Add our map
+// LOW RES
+var unity_map_low = L.vectorGrid.protobuf(url_low, {
+    maxZoom: 8,
+    vectorTileLayerStyles: {
+	interactive: true,
+	counties_thirdparty_normal: properties => {
+	    return getColorFromProperty2(properties, "third_normal")
+	}
+    },
+    // MUST include attribution - where we got this data
+    attribution: ' 2016 Precinct-Level Election Results - Harvard Datasource: Voting and Election Science Team, University of Florida and Witchita State University',
+    
+})
+
+
 // Add our layer to the map, in the right order for visibility
 base_layer.addTo(map)
 base_background.addTo(map)
-unity_map.addTo(map)
+unity_map_low.addTo(map)
+unity_map_high.addTo(map)
 base_labels.addTo(map)
 
 

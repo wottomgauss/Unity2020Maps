@@ -98,8 +98,6 @@ function build_desktop_panel()
     	.html("")
     	.attr("href", "maps.stamen.com")
 
-    
-
 }
 
 
