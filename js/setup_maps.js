@@ -16,7 +16,8 @@ if (isMobile)
 {
     // Remove side panel if on Mobile
     d3.select("#left_panel").remove()
-    d3.select("#mapid").style('height', 'calc(100vh - 20px)')
+    d3.select("#bottom_panel").style('height', '30px')
+    d3.select("#mapid").style('height', 'calc(100vh - 30px)')
     map.invalidateSize()
     map.setView([38, -122], 5)
     build_mobile_panel()
