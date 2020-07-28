@@ -39,22 +39,23 @@ function build_desktop_panel()
 	.style('margin-top', '20px')
 	.html("<b>Step 2:</b> Look for PURPLE areas - these are the areas that our team thinks is most likely to be open to our message. YELLOW regions are less likely to be interested. GREEN regions are unlikely, and GREY regions are very unlikely.")
 
-    var legend_data = [[{name: "(5) Good Area", color: ""}, {name: null, color: "purple"}],
-		       [{name: "(4) Possible Area", color: ""}, {name: null, color: "orange"}],
-		       [{name: "(3) Possible Area", color: ""}, {name: null, color: "yellow"}],
-		       [{name: "(2) Unlikely Area", color: ""}, {name: null, color: "green"}],
-		       [{name: "(1) Least Likely", color: ""}, {name: null, color: "black"}],
+    var legend_data = [[{name: "★★★★★", color: ""}, {name: null, color: "purple"}],
+		       [{name: "★★★★", color: ""}, {name: null, color: "orange"}],
+		       [{name: "★★★", color: ""}, {name: null, color: "yellow"}],
+		       [{name: "★★", color: ""}, {name: null, color: "green"}],
+		       [{name: "★", color: ""}, {name: null, color: "black"}],
 		      ]
 
     header.append('table')
 	.style('margin-top', '20px')
+	.style('margin-left', '20px')
 	.append('tbody')
 	.selectAll('tr').data(legend_data).enter().append('tr')
 	.selectAll('td').data(function(d) {return d})
 	.enter().append('td')
 	.style('width', function(d)
 	       {
-		   if (d.name) return "150px"
+		   if (d.name) return "100px"
 		   else return "50px"
 	       })
 
@@ -106,7 +107,7 @@ function build_mobile_panel()
     var panel = d3.select("#bottom_panel").style('display', 'flex').style('flex-direction', 'row')
 	.style('justify-content', 'space-between')
 
-    var legend_data = [[{name: "Good Area (5)", color: ""}, {name: null, color: "purple"}, {name: "Possible Area (4)", color: ""}, {name: null, color: "orange"}, {name: "Possible Area (3)", color: ""}, {name: null, color: "yellow"}, {name: "Unlikely Area (2)", color: ""}, {name: null, color: "green"}, {name: "Least Likely (1)", color: ""}, {name: null, color: "black"} ],
+    var legend_data = [[{name: "★★★★★", color: ""}, {name: null, color: "purple"}, {name: "★★★★", color: ""}, {name: null, color: "orange"}, {name: "★★★", color: ""}, {name: null, color: "yellow"}, {name: "★★", color: ""}, {name: null, color: "green"}, {name: "★", color: ""}, {name: null, color: "black"} ],
 		      ]
 
     panel.append('table')
