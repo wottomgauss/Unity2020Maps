@@ -83,7 +83,7 @@ var base_layer = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-hybrid
 var base_background = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png', {
     attribution: '',
     maxZoom: 18,
-    opacity: 0.5,
+    opacity: 0.7,
     id: 'lines',
     tileSize: 512,
     zoomOffset: -1,
@@ -104,7 +104,7 @@ var url_high = "https://maps443-1.tcpdump.rocks/data/targets_high/{z}/{x}/{y}.pb
 
 // Add our map - HIGH RES
 var unity_map_high = L.vectorGrid.protobuf(url_high, {
-    maxZoom: 20,
+    //maxZoom: 20,
     vectorTileLayerStyles: {
 	interactive: true,
 	targets_high: properties => {
@@ -121,7 +121,7 @@ var url_low = "https://maps443-2.tcpdump.rocks/data/targets_low/{z}/{x}/{y}.pbf"
 // Add our map
 // LOW RES
 var unity_map_low = L.vectorGrid.protobuf(url_low, {
-    maxZoom: 8,
+    //maxZoom: 8,
     vectorTileLayerStyles: {
 	interactive: true,
 	targets_low: properties => {
@@ -133,12 +133,32 @@ var unity_map_low = L.vectorGrid.protobuf(url_low, {
     
 })
 
+// Add volunteer map
+var volunteer_map = new L.GeoJSON(volunteer_geojson,
+				  {
+				      pointToLayer: createCircleMarker
+});       
+
+function createCircleMarker( feature, latlng ){
+  // Change the values of these options to change the symbol's appearance
+  let options = {
+    radius: feature.properties.volunteer_count,
+    fillColor: "green",
+    color: "black",
+    weight: 1,
+    opacity: 0.8,
+    fillOpacity: 0.8
+  }
+  return L.circleMarker( latlng, options );
+}
+
 
 // Add our layer to the map, in the right order for visibility
 base_layer.addTo(map)
 base_background.addTo(map)
 unity_map_low.addTo(map)
 unity_map_high.addTo(map)
+//volunteer_map.addTo(map);
 base_labels.addTo(map)
 
 
