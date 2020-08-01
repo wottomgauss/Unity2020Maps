@@ -26,7 +26,7 @@ function build_desktop_panel()
 
     header.append('a')
 	.style('margin-top', '20px')
-	.html("<b>Step 1:</b> Zoom to your location or search for your city here:")
+	.html("<b>Step 1:</b> Zoom to your location or search for your city")
 
     // Geocoder
     header.append('div')
@@ -71,7 +71,7 @@ function build_desktop_panel()
     // Save
     header.append('a')
 	.style('margin-top', '20px')
-	.html("<b>Step 3:</b> Print your map here, or save an image to embed wheverever you want:")
+	.html("<b>Step 3:</b> Print this map here if you like:")
 
     header.append('button')
 	.style('margin-top', '20px')
@@ -85,6 +85,11 @@ function build_desktop_panel()
 		var modeToUse = L.control.browserPrint.mode.auto();
 		map.printControl.print(modeToUse);
 	    })
+
+    header.append('a')
+	.style('margin-top', '20px')
+	.html("<b>Step 4:</b> Outreach in these areas!")
+
 
     // Footer
     
