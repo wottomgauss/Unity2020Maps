@@ -22,7 +22,7 @@ function build_desktop_panel()
     // Header
     header.append('a')
 	.style('margin-top', '20px')
-	.html("Welcome volunteers! Use this map to find areas near you that may have the highest possibility of supporting the Unity2020 message.")
+	.html("Welcome volunteers! Use this map to find areas near you that may have the highest possibility of supporting the Unity2020 message, based on past voting data for 3rd-Party candidates and non-voters.")
 
     header.append('a')
 	.style('margin-top', '20px')
