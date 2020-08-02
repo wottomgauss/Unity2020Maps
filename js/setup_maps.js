@@ -166,13 +166,13 @@ base_labels.addTo(map)
 // register custom tile layer for printing
 //L.Control.BrowserPrint.Utils.initialize();
 L.Control.BrowserPrint.Utils.registerLayer(
-	// Actual typeof object to compare with
+    // Actual typeof object to compare with
     L.VectorGrid,
-	// Any string you would like for current function for print events
-	'L.VectorGrid',
-	function (layer, utils) {
+    // Any string you would like for current function for print events
+    'L.VectorGrid',
+    function (layer, utils) {
         return L.vectorGrid.protobuf(layer._url, layer.options);
-	}
+    }
 );
 
 // For development purposes - log the current zoom level
