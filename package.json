@@ -1,0 +1,17 @@
+{
+  "name": "unity2020maps",
+  "version": "0.0.0",
+  "description": "Lightweight mapping utility to display target areas for Unity2020.",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  },
+  "main": "index.html",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wottomgauss/unity2020maps.git"
+  },
+  "author": "wottomgauss",
+  "license": "UNLICENSED"
+}
