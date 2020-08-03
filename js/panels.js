@@ -28,7 +28,12 @@ function build_legend()
 
 function build_desktop_panel()
 {
-    var panel = jQuery("#left_panel").addClass("collapse show")
+    var panel = jQuery("#left_panel")
+        .addClass("leaflet-control collapse show")
+        .on("mousedown touchstart dblclick pointerdown", function (e) {
+            // stop mouse events on the panel from triggering drag functionality on the map
+            e.stopPropagation()
+        })
 
     // Header
     var header = jQuery(`
