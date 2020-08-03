@@ -38,6 +38,23 @@
     font-size: 20px;
 }
 
+#left_panel .leaflet-control-geocoder {
+    margin: 0;
+    position: relative;
+    width: 100%;
+}
+
+#left_panel .leaflet-control-geocoder-form {
+    width: calc(100% - 26px);
+}
+
+#left_panel .leaflet-control-geocoder-alternatives {
+    background-color: #fff;
+    position: absolute;
+        top: 24px;
+    width: 100%;
+}
+
 #left_panel > p {
     margin-top: 20px;
 }

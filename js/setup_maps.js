@@ -58,6 +58,10 @@ var geocoder = L.Control.geocoder({
     })
     .addTo(map);
 
+if (!isMobile) {
+    jQuery(geocoder.getContainer()).insertAfter("#left_panel header")
+}
+
 // Print map
 L.control.browserPrint({manualMode: true}).addTo(map)
 
