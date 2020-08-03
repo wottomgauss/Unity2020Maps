@@ -59,7 +59,7 @@ var geocoder = L.Control.geocoder({
     .addTo(map);
 
 if (!isMobile) {
-    jQuery(geocoder.getContainer()).insertAfter("#left_panel header")
+    jQuery(geocoder.getContainer()).appendTo("#left_panel header")
 }
 
 // Print map

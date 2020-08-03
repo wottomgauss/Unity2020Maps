@@ -28,7 +28,7 @@ function build_legend()
 
 function build_desktop_panel()
 {
-    var panel = jQuery("#left_panel")
+    var panel = jQuery("#left_panel").addClass("collapse show")
 
     // Header
     var header = jQuery(`
@@ -37,32 +37,77 @@ function build_desktop_panel()
             <h3>Outreach Areas</h3>
         </header>
     `).appendTo(panel)
+    
+    var content = jQuery(`<div class="panel-content"></div>`)
+        .appendTo(panel)
+    
+    content.append("<p>Welcome volunteers! Use this map to find areas near you that may have the highest possibility of supporting the Unity2020 message, based on past voting data for 3rd-Party candidates and non-voters.</p>")
 
-    panel.append("<p>Welcome volunteers! Use this map to find areas near you that may have the highest possibility of supporting the Unity2020 message, based on past voting data for 3rd-Party candidates and non-voters.</p>")
-
-    panel.append("<p><b>Step 1:</b> Zoom to your location or search for your city</p>")
+    content.append(`
+        <section class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    <b>Step 1:</b> Zoom to your location or search for your city
+                </p>
+            </div>
+        </section>
+    `)
 
     // Geocoder
-    panel.append(`<div id="custom-map-controls></div>`)
+    content.append(`<div id="custom-map-controls></div>`)
 
 
 
     // Legend
-    panel.append("<p><b>Step 2:</b> Look for PURPLE areas - these are the areas that our team thinks is most likely to be open to our message. ORANGE and YELLOW regions are less likely to be interested. GREEN regions are unlikely, and GREY regions are very unlikely.</p>")
+    jQuery(`
+        <section class="card">
+            <div class="list-group list-group-flush">
+                <p class="list-group-item">
+                    <b>Step 2:</b> Look for PURPLE areas - these are the areas that our team thinks is most likely to be open to our message. ORANGE and YELLOW regions are less likely to be interested. GREEN regions are unlikely, and GREY regions are very unlikely.
+                </p>
+            </div>
+        </section>
+    `)
+        .find(".list-group")
+        .append(build_legend().addClass("list-group-item"))
+        .end()
+        .appendTo(content)
     
-    panel.append(build_legend())
 
     // Save
-    panel.append("<p><b>Step 3:</b> Print this map here if you like:</p>")
+    jQuery(`
+        <section class="card">
+            <div class="list-group list-group-flush">
+                <p class="list-group-item">
+                    <b>Step 3:</b> Print this map here if you like:
+                </p>
+                <p class="list-group-item">
+                    
+                </p>
+            </div>
+        </section >
+    `)
+        .find(".list-group-item:last-child")
+        .append(
+            jQuery(`<button class="btn btn-light print-save">Print / Save Map</button>`)
+                .on('click', function() {
+                    var modeToUse = L.control.browserPrint.mode.auto()
+                    map.printControl.print(modeToUse)
+                })
+        )
+        .end()
+        .appendTo(content)
+    
 
-    jQuery(`<button class="print-save">Print / Save Map</button>`)
-        .appendTo(panel)
-        .on('click', function() {
-            var modeToUse = L.control.browserPrint.mode.auto()
-            map.printControl.print(modeToUse)
-        })
-
-    panel.append('<p><b>Step 4:</b> Outreach in these areas!</p>')
+    content.append(`
+        <section class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    <b>Step 4:</b> Outreach in these areas!
+                </p>
+            </div>
+        </section>
+    `)
 
 
     // Footer
@@ -77,6 +122,13 @@ function build_desktop_panel()
             <a href="maps.stamen.com">maps.stamen.com</a>
         </p>
     `)
+    
+    jQuery("#mapcontainer .leaflet-control-container")
+        .append(`
+            <a class="toggle-sidebar" data-toggle="collapse" href="#left_panel" role="button" aria-expanded="false" aria-controls="left_panel">
+                &nbsp;
+            </a>
+        `)
     
 }
 

@@ -7,21 +7,82 @@
 
 
 #mapid {
+    display: flex;
     flex: 1 1;
+    position: relative;
     width: 100%;
     height: 100%;
 }
 
+#mapid .leaflet-control-container {
+    position: relative;
+    
+    flex: 1 1;
+}
+
+#mapid .toggle-sidebar {
+    background-color: #fff;
+    box-shadow: #000 10px 0 20px -5px;
+    color: #aaa;
+    display: block;
+    font-size: 40px;
+    line-height: 45px;
+    margin: auto 0px;
+    position: absolute;
+        top: 0;
+        bottom: 0;
+    text-decoration: none;
+    width: 15px;
+    height: 50px;
+    z-index: 1100;
+}
+
+#mapid .toggle-sidebar:hover {
+    color: #000;
+}
+
+#mapid .toggle-sidebar:before {
+    content: "\2039";
+    display: block;
+    position: absolute;
+        top: 0;
+        left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#mapid .toggle-sidebar.collapsed:before {
+    content: "\203A";
+}
 
 #left_panel {
-    background-color: lightgrey;
+    background-color: #fff;
+    box-shadow: #000 10px 0 40px -10px;
     display: flex;
     flex-direction: column;
+    font-size: 1.1em;
     justify-content: space-between;
+    opacity: 1;
     padding: 20px;
     position: relative;
-    width: 300px;
+    transition: flex-basis .35s ease,
+        padding .35s ease;
+    will-change: flex-basis, padding;
     height: 100%;
+    z-index: 1000;
+    
+    flex: 0 1 300px;
+}
+
+#left_panel.collapsing {
+    flex-basis: 0;
+    overflow: hidden;
+    padding: 0;
+    height: 100% !important;
+}
+
+#left_panel.collapse:not(.show) {
+    display: none;
 }
 
 #left_panel header {
@@ -41,29 +102,39 @@
 #left_panel .leaflet-control-geocoder {
     margin: 0;
     position: relative;
+    text-align: left;
     width: 100%;
 }
 
 #left_panel .leaflet-control-geocoder-form {
-    width: calc(100% - 26px);
+    width: calc(100% - 30px);
 }
 
 #left_panel .leaflet-control-geocoder-alternatives {
     background-color: #fff;
+    border: 1px #aaa solid;
+    border-top: 0;
     position: absolute;
-        top: 24px;
+        top: 32px;
     width: 100%;
 }
 
-#left_panel > p {
-    margin-top: 20px;
+#left_panel .card {
+    margin: 25px 0;
+}
+
+#left_panel .card-body {
+    padding: .75rem 1.25rem;
+}
+
+#left_panel .card .list-group-item {
+    margin-bottom: 0;
 }
 
 #left_panel .legend {
+    background-color: transparent;
     border-collapse: separate;
     border-spacing: 5px;
-    margin-top: 20px;
-    margin-left: 20px;
 }
 
 #left_panel .legend .name {
@@ -76,7 +147,8 @@
 }
 
 #left_panel .print-save {
-    margin: 30px 10px 0 10px;
+    display: block;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -100,15 +172,7 @@
 }
 
 #bottom_panel .legend tbody {
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
     display: flex;
-    -webkit-flex-direction: row;
-    -moz-flex-direction: row;
-    -ms-flex-direction: row;
-    -o-flex-direction: row;
     flex-direction: row;
 }
 
