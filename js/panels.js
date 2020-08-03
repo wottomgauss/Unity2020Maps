@@ -55,7 +55,8 @@ function build_desktop_panel()
     // Save
     panel.append("<p><b>Step 3:</b> Print this map here if you like:</p>")
 
-    panel.append(`<button class="print-save">Print / Save Map</button`)
+    jQuery(`<button class="print-save">Print / Save Map</button>`)
+        .appendTo(panel)
         .on('click', function() {
             var modeToUse = L.control.browserPrint.mode.auto()
             map.printControl.print(modeToUse)

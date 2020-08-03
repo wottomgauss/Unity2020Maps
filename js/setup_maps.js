@@ -1,3 +1,5 @@
+/* globals L, build_desktop_panel, build_mobile_panel */
+
 // This is the main Javascript file
 // Leaflet map is loaded with basemaps and our custom maps
 // Full description of the technology stack explained here:
