@@ -15,9 +15,9 @@ var isMobile = (typeof window.orientation !== "undefined") || (navigator.userAge
 if (isMobile)
 {
     // Remove side panel if on Mobile
-    d3.select("#left_panel").remove()
-    d3.select("#bottom_panel").style('height', '30px')
-    d3.select("#mapid").style('height', 'calc(100vh - 30px)')
+    jQuery("#left_panel").remove()
+    jQuery("#bottom_panel")
+    jQuery("#mapid")
     map.invalidateSize()
     map.setView([38, -122], 5)
     build_mobile_panel()
@@ -30,7 +30,7 @@ else
 {
     // Build the side panel
 
-    d3.select("#bottom_panel").remove()
+    jQuery("#bottom_panel").remove()
     build_desktop_panel()
 
     // d3.select("#left_panel").remove()
