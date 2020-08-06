@@ -117,6 +117,7 @@ var unity_map_high = L.vectorGrid.protobuf(url_high, {
 	    return getColorFromProperty1(properties, "percentile")
 	}
     },
+    id: 'map-high',
     // MUST include attribution - where we got this data
     attribution: ' 2016 Precinct-Level Election Results - Harvard Datasource: Voting and Election Science Team, University of Florida and Witchita State University',
     
@@ -134,6 +135,7 @@ var unity_map_low = L.vectorGrid.protobuf(url_low, {
 	    return getColorFromProperty2(properties, "percentile")
 	}
     },
+    id: 'map-low',
     // MUST include attribution - where we got this data
     attribution: ' 2016 Precinct-Level Election Results - Harvard Datasource: Voting and Election Science Team, University of Florida and Witchita State University',
     
@@ -167,6 +169,17 @@ unity_map_high.addTo(map)
 //volunteer_map.addTo(map);
 base_labels.addTo(map)
 
+// register custom tile layer for printing
+//L.Control.BrowserPrint.Utils.initialize();
+L.Control.BrowserPrint.Utils.registerLayer(
+    // Actual typeof object to compare with
+    L.VectorGrid,
+    // Any string you would like for current function for print events
+    'L.VectorGrid',
+    function (layer, utils) {
+        return L.vectorGrid.protobuf(layer._url, layer.options);
+    }
+);
 
 // For development purposes - log the current zoom level
 map.on('zoomend', function() {
