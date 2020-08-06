@@ -1,3 +1,5 @@
+/* globals L, build_desktop_panel, build_mobile_panel */
+
 // This is the main Javascript file
 // Leaflet map is loaded with basemaps and our custom maps
 // Full description of the technology stack explained here:
@@ -15,9 +17,9 @@ var isMobile = (typeof window.orientation !== "undefined") || (navigator.userAge
 if (isMobile)
 {
     // Remove side panel if on Mobile
-    d3.select("#left_panel").remove()
-    d3.select("#bottom_panel").style('height', '30px')
-    d3.select("#mapid").style('height', 'calc(100vh - 30px)')
+    jQuery("#left_panel").remove()
+    jQuery("#bottom_panel")
+    jQuery("#mapid")
     map.invalidateSize()
     map.setView([38, -122], 5)
     build_mobile_panel()
@@ -30,7 +32,7 @@ else
 {
     // Build the side panel
 
-    d3.select("#bottom_panel").remove()
+    jQuery("#bottom_panel").remove()
     build_desktop_panel()
 
     // d3.select("#left_panel").remove()
@@ -55,6 +57,10 @@ var geocoder = L.Control.geocoder({
 	map.fitBounds(poly.getBounds());
     })
     .addTo(map);
+
+if (!isMobile) {
+    jQuery(geocoder.getContainer()).appendTo("#left_panel header")
+}
 
 // Print map
 L.control.browserPrint({manualMode: true}).addTo(map)
